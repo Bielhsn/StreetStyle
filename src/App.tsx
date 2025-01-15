@@ -8,7 +8,7 @@ import { Checkout } from './components/Checkout';
 import { products } from './data/products';
 
 function AppContent() {
-  const { cart } = useCart();
+  const { cart } = useCart(); // Usando o contexto para obter os itens do carrinho
   const [isCheckingOut, setIsCheckingOut] = useState(false);
   const [isProfileOpen, setIsProfileOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState('');
@@ -83,22 +83,6 @@ function AppContent() {
                         <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-1">John Doe</h3>
                         <p className="text-sm text-gray-500 dark:text-gray-400 mb-3">john.doe@example.com</p>
                       </div>
-                      <div className="border-t border-gray-200 dark:border-gray-700 mt-2 pt-2">
-                        <ul className="space-y-2">
-                          <li className="flex items-center justify-between text-sm text-gray-700 dark:text-gray-200 px-2 py-1 hover:bg-gray-50 dark:hover:bg-gray-700 rounded">
-                            <span>My Orders</span>
-                            <span className="bg-gray-100 dark:bg-gray-600 px-2 py-1 rounded">5</span>
-                          </li>
-                          <li className="flex items-center justify-between text-sm text-gray-700 dark:text-gray-200 px-2 py-1 hover:bg-gray-50 dark:hover:bg-gray-700 rounded">
-                            <span>Wishlist</span>
-                            <span className="bg-gray-100 dark:bg-gray-600 px-2 py-1 rounded">12</span>
-                          </li>
-                          <li className="flex items-center justify-between text-sm text-gray-700 dark:text-gray-200 px-2 py-1 hover:bg-gray-50 dark:hover:bg-gray-700 rounded">
-                            <span>Reviews</span>
-                            <span className="bg-gray-100 dark:bg-gray-600 px-2 py-1 rounded">8</span>
-                          </li>
-                        </ul>
-                      </div>
                       <button className="mt-4 w-full bg-blue-600 hover:bg-blue-700 text-white text-sm font-medium py-2 px-4 rounded transition-colors">
                         Edit Profile
                       </button>
@@ -138,15 +122,9 @@ function AppContent() {
             {categories[selectedCategory as keyof typeof categories]}
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {filteredProducts.length > 0 ? (
-              filteredProducts.map((product) => (
-                <ProductCard key={product.id} product={product} />
-              ))
-            ) : (
-              <div className="col-span-full text-center py-8">
-                <p className="text-gray-500 dark:text-gray-400">No products found matching your criteria.</p>
-              </div>
-            )}
+            {filteredProducts.map((product) => (
+              <ProductCard key={product.id} product={product} />
+            ))}
           </div>
         </main>
       )}
