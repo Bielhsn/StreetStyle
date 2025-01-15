@@ -1,11 +1,11 @@
 export const products = [
   {
     id: 1,
-    name: "Premium Wireless Headphones",
-    price: 299.99,
-    description: "High-quality wireless headphones with noise cancellation",
-    image: "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?auto=format&fit=crop&w=800&q=80",
-    category: "Electronics"
+    name: "Classic Baseball Cap",
+    price: 29.99,
+    description: "Stylish and comfortable baseball cap for everyday wear",
+    image: "https://images.unsplash.com/photo-1588850561407-ed78c282e89b?auto=format&fit=crop&w=800&q=80",
+    category: "accessories"
   },
   {
     id: 2,
