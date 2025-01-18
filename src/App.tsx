@@ -11,7 +11,10 @@ import { ProductCard } from "./components/ProductCard";
 import { Cart } from "./components/Cart";
 import { BrowserRouter as Router, Routes, Route, useNavigate } from "react-router-dom";
 import { ProductCreate } from "./components/ProductCreate";
-
+import { Profile } from "./components/Profile";
+import { StoreSettings } from './components/StoreSettings';
+import { LocationSettings } from './components/settings/LocationSettings';
+import { ShippingSettings } from './components/settings/ShippingSettings';
 interface Product {
   id: string;
   name: string;
@@ -153,7 +156,7 @@ function AppContent() {
                   <div className="absolute right-0 mt-2 w-48 bg-white dark:bg-gray-800 rounded-lg shadow-lg py-2 z-50">
                     <button
                       className="w-full text-left px-4 py-2 text-gray-800 dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors"
-                      onClick={() => alert("Visiting Profile")}
+                      onClick={() => navigate("/Profile")}
                     >
                       Visit Profile
                     </button>
@@ -227,7 +230,11 @@ function App() {
           <Routes>
             <Route path="/" element={<AppContent />} />
             <Route path="/ProductCreate" element={<ProductCreate />} />
-          </Routes>
+            <Route path="/Profile" element={<Profile />} />
+            <Route path="/StoreSettings" element={<StoreSettings />} />
+            <Route path="/LocationSettings" element={<LocationSettings />} />
+            <Route path="/ShippingSettings" element={<ShippingSettings />} />
+            </Routes>
         </Router>
       </CartProvider>
     </ThemeProvider>
