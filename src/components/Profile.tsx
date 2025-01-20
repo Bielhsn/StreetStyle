@@ -25,7 +25,7 @@ export function Profile() {
   const navigate = useNavigate();
 
   return (
-    <div className="flex">
+    <div className="flex bg-gray-100 dark:bg-gray-900 min-h-screen">
       {/* Sidebar */}
       <div className="w-64 min-h-screen bg-white dark:bg-gray-800 shadow-lg">
         <div className="p-6">
@@ -101,7 +101,7 @@ export function Profile() {
       </div>
 
       {/* Main Content */}
-      <div className="flex-1 p-8">
+      <div className="flex-1 p-8 bg-gray-100 dark:bg-gray-900">
         <div className="mb-6">
           <button
             onClick={() => navigate('/')}
