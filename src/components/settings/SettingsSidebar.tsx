@@ -10,21 +10,13 @@ interface SettingsSidebarProps {
 export function SettingsSidebar({ activeTab, setActiveTab }: SettingsSidebarProps) {
   const navigate = useNavigate();
 
-  const handleTabClick = (tab: string) => {
-    if (tab === 'general') {
-      navigate('/StoreSettings');
-    } else {
-      setActiveTab(tab);
-    }
-  };
-
   return (
     <div className="w-64 min-h-screen bg-white dark:bg-gray-800 shadow-lg">
       <div className="p-6">
         <h2 className="text-lg font-semibold text-gray-900 dark:text-white mb-4">Settings</h2>
         <nav className="space-y-2">
           <button 
-            onClick={() => handleTabClick('general')}
+            onClick={() => navigate('/StoreSettings')}
             className={`w-full flex items-center px-4 py-2 ${
               activeTab === 'general' 
                 ? 'text-gray-700 dark:text-gray-200 bg-gray-100 dark:bg-gray-700' 
@@ -35,7 +27,7 @@ export function SettingsSidebar({ activeTab, setActiveTab }: SettingsSidebarProp
             General
           </button>
           <button 
-            onClick={() => handleTabClick('location')}
+            onClick={() => setActiveTab('location')}
             className={`w-full flex items-center px-4 py-2 ${
               activeTab === 'location' 
                 ? 'text-gray-700 dark:text-gray-200 bg-gray-100 dark:bg-gray-700' 
@@ -46,7 +38,7 @@ export function SettingsSidebar({ activeTab, setActiveTab }: SettingsSidebarProp
             Location
           </button>
           <button 
-            onClick={() => handleTabClick('shipping')}
+            onClick={() => setActiveTab('shipping')}
             className={`w-full flex items-center px-4 py-2 ${
               activeTab === 'shipping' 
                 ? 'text-gray-700 dark:text-gray-200 bg-gray-100 dark:bg-gray-700' 
@@ -57,7 +49,7 @@ export function SettingsSidebar({ activeTab, setActiveTab }: SettingsSidebarProp
             Shipping
           </button>
           <button 
-            onClick={() => handleTabClick('payment')}
+            onClick={() => setActiveTab('payment')}
             className={`w-full flex items-center px-4 py-2 ${
               activeTab === 'payment' 
                 ? 'text-gray-700 dark:text-gray-200 bg-gray-100 dark:bg-gray-700' 
@@ -68,7 +60,7 @@ export function SettingsSidebar({ activeTab, setActiveTab }: SettingsSidebarProp
             Payment
           </button>
           <button 
-            onClick={() => handleTabClick('notifications')}
+            onClick={() => setActiveTab('notifications')}
             className={`w-full flex items-center px-4 py-2 ${
               activeTab === 'notifications' 
                 ? 'text-gray-700 dark:text-gray-200 bg-gray-100 dark:bg-gray-700' 
@@ -79,7 +71,7 @@ export function SettingsSidebar({ activeTab, setActiveTab }: SettingsSidebarProp
             Notifications
           </button>
           <button 
-            onClick={() => handleTabClick('security')}
+            onClick={() => setActiveTab('security')}
             className={`w-full flex items-center px-4 py-2 ${
               activeTab === 'security' 
                 ? 'text-gray-700 dark:text-gray-200 bg-gray-100 dark:bg-gray-700' 
@@ -90,7 +82,7 @@ export function SettingsSidebar({ activeTab, setActiveTab }: SettingsSidebarProp
             Security
           </button>
           <button 
-            onClick={() => handleTabClick('connections')}
+            onClick={() => setActiveTab('connections')}
             className={`w-full flex items-center px-4 py-2 ${
               activeTab === 'connections' 
                 ? 'text-gray-700 dark:text-gray-200 bg-gray-100 dark:bg-gray-700' 

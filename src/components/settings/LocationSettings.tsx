@@ -8,6 +8,9 @@ export function LocationSettings() {
 
   const handleTabChange = (tab: string) => {
     switch (tab) {
+      case 'location':
+        navigate('/LocationSettings');
+        break;
       case 'shipping':
         navigate('/ShippingSettings');
         break;
@@ -23,8 +26,9 @@ export function LocationSettings() {
       case 'connections':
         navigate('/ConnectionSettings');
         break;
-      default:
+      case 'general':
         navigate('/StoreSettings');
+        break;
     }
   };
 

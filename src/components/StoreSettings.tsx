@@ -24,13 +24,12 @@ export function StoreSettings() {
             Settings
           </h2>
           <nav className="space-y-2">
-            <a
-              href="#general"
-              className="flex items-center px-4 py-2 text-gray-700 dark:text-gray-200 bg-gray-100 dark:bg-gray-700 rounded-lg"
+            <button
+              className="flex items-center px-4 py-2 text-gray-700 dark:text-gray-200 bg-gray-100 dark:bg-gray-700 rounded-lg w-full"
             >
               <Store className="h-5 w-5 mr-3" />
               General
-            </a>
+            </button>
             <button
               onClick={() => navigate("/LocationSettings")}
               className="flex items-center px-4 py-2 text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-lg w-full"

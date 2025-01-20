@@ -10,11 +10,18 @@ import { ThemeProvider, useTheme } from "./context/ThemeContext";
 import { ProductCard } from "./components/ProductCard";
 import { Cart } from "./components/Cart";
 import { BrowserRouter as Router, Routes, Route, useNavigate } from "react-router-dom";
-import { ProductCreate } from "./components/ProductCreate";
+import { ProductCreate } from "./components/products/ProductCreate";
 import { Profile } from "./components/Profile";
 import { StoreSettings } from './components/StoreSettings';
 import { LocationSettings } from './components/settings/LocationSettings';
 import { ShippingSettings } from './components/settings/ShippingSettings';
+import { PaymentSettings } from './components/settings/PaymentSettings';
+import { NotificationSettings } from './components/settings/NotificationSettings';
+import { SecuritySettings } from './components/settings/SecuritySettings';
+import { ConnectionSettings } from './components/settings/ConnectionSettings';
+import { ProductEdit } from './components/products/ProductEdit';
+import { Analytics } from './components/analytics/Analytics';
+import { Login } from './components/auth/Login';
 interface Product {
   id: string;
   name: string;
@@ -106,6 +113,11 @@ function AppContent() {
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, [isProfileOpen]);
 
+  const handleLogout = () => {
+    localStorage.removeItem('isAuthenticated');
+    navigate('/login');
+  };
+
   return (
     <div className="min-h-screen bg-gray-100 dark:bg-gray-900 transition-colors">
       {/* Header */}
@@ -168,7 +180,7 @@ function AppContent() {
                     </button>
                     <button
                       className="w-full text-left px-4 py-2 text-gray-800 dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors"
-                      onClick={() => alert("Logging Out")}
+                      onClick={handleLogout}
                     >
                       Log Out
                     </button>
@@ -234,7 +246,14 @@ function App() {
             <Route path="/StoreSettings" element={<StoreSettings />} />
             <Route path="/LocationSettings" element={<LocationSettings />} />
             <Route path="/ShippingSettings" element={<ShippingSettings />} />
-            </Routes>
+            <Route path="/PaymentSettings" element={<PaymentSettings />} />
+            <Route path="/NotificationSettings" element={<NotificationSettings />} />
+            <Route path="/SecuritySettings" element={<SecuritySettings />} />
+            <Route path="/ConnectionSettings" element={<ConnectionSettings />} />
+            <Route path="/ProductEdit" element={<ProductEdit />} />
+            <Route path="/Analytics" element={<Analytics />} />
+            <Route path="/Login" element={<Login />} />
+          </Routes>
         </Router>
       </CartProvider>
     </ThemeProvider>

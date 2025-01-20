@@ -11,6 +11,9 @@ export function ShippingSettings() {
       case 'location':
         navigate('/LocationSettings');
         break;
+      case 'shipping':
+        navigate('/ShippingSettings');
+        break;
       case 'payment':
         navigate('/PaymentSettings');
         break;
@@ -23,8 +26,9 @@ export function ShippingSettings() {
       case 'connections':
         navigate('/ConnectionSettings');
         break;
-      default:
+      case 'general':
         navigate('/StoreSettings');
+        break;
     }
   };
 

@@ -45,6 +45,19 @@ export function Profile() {
             </button>
 
             <button 
+              onClick={() => navigate('/ProductEdit')}
+              className="w-full flex items-center justify-between p-3 text-left bg-gray-50 dark:bg-gray-700 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-600 transition-colors"
+            >
+              <div className="flex items-center">
+                <Package className="h-5 w-5 text-gray-500 dark:text-gray-400 mr-3" />
+                <span className="text-gray-700 dark:text-gray-200">Edit Products</span>
+              </div>
+              <svg className="w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+              </svg>
+            </button>
+
+            <button 
             onClick={() => navigate('/StoreSettings')}
             className="w-full flex items-center justify-between p-3 text-left bg-gray-50 dark:bg-gray-700 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-600 transition-colors">
               <div className="flex items-center">
@@ -56,15 +69,19 @@ export function Profile() {
               </svg>
             </button>
 
-            <button className="w-full flex items-center justify-between p-3 text-left bg-gray-50 dark:bg-gray-700 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-600 transition-colors">
+            <button 
+            onClick={() => navigate('/Analytics')}
+            className="w-full flex items-center justify-between p-3 text-left bg-gray-50 dark:bg-gray-700 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-600 transition-colors">
               <div className="flex items-center">
-                <TrendingUp className="h-5 w-5 text-gray-500 dark:text-gray-400 mr-3" />
+                <Settings className="h-5 w-5 text-gray-500 dark:text-gray-400 mr-3" />
                 <span className="text-gray-700 dark:text-gray-200">View Analytics</span>
               </div>
               <svg className="w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
               </svg>
             </button>
+
+
           </div>
 
           <div className="mt-6 pt-6 border-t border-gray-200 dark:border-gray-700">
