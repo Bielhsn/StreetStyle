@@ -1,27 +1,27 @@
 import { useState, useEffect } from "react";
-import {
-  ShoppingCart as CartIcon,
-  Sun,
-  Moon,
-  UserCircle,
-} from "lucide-react";
+import { ShoppingCart as CartIcon, Sun, Moon, UserCircle } from "lucide-react";
 import { CartProvider, useCart } from "./context/CartContext";
 import { ThemeProvider, useTheme } from "./context/ThemeContext";
 import { ProductCard } from "./components/ProductCard";
 import { Cart } from "./components/Cart";
-import { BrowserRouter as Router, Routes, Route, useNavigate } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+  useNavigate,
+} from "react-router-dom";
 import { ProductCreate } from "./components/products/ProductCreate";
 import { Profile } from "./components/Profile";
-import { StoreSettings } from './components/StoreSettings';
-import { LocationSettings } from './components/settings/LocationSettings';
-import { ShippingSettings } from './components/settings/ShippingSettings';
-import { PaymentSettings } from './components/settings/PaymentSettings';
-import { NotificationSettings } from './components/settings/NotificationSettings';
-import { SecuritySettings } from './components/settings/SecuritySettings';
-import { ConnectionSettings } from './components/settings/ConnectionSettings';
-import { ProductEdit } from './components/products/ProductEdit';
-import { Analytics } from './components/analytics/Analytics';
-import { Login } from './components/auth/Login';
+import { StoreSettings } from "./components/StoreSettings";
+import { LocationSettings } from "./components/settings/LocationSettings";
+import { ShippingSettings } from "./components/settings/ShippingSettings";
+import { PaymentSettings } from "./components/settings/PaymentSettings";
+import { NotificationSettings } from "./components/settings/NotificationSettings";
+import { SecuritySettings } from "./components/settings/SecuritySettings";
+import { ConnectionSettings } from "./components/settings/ConnectionSettings";
+import { ProductEdit } from "./components/products/ProductEdit";
+import { Analytics } from "./components/analytics/Analytics";
+import { Login } from "./components/auth/Login";
 interface Product {
   id: string;
   name: string;
@@ -50,7 +50,10 @@ function AppContent() {
 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
-      if (isProfileMenuOpen && !(event.target as Element).closest(".profile-menu")) {
+      if (
+        isProfileMenuOpen &&
+        !(event.target as Element).closest(".profile-menu")
+      ) {
         setIsProfileMenuOpen(false);
       }
     };
@@ -80,7 +83,9 @@ function AppContent() {
       fetch(`https://api.github.com/users/${username}`)
         .then((response) => response.json())
         .then((data) => setProfile(data))
-        .catch((error) => console.error("Erro ao buscar o perfil do GitHub:", error));
+        .catch((error) =>
+          console.error("Erro ao buscar o perfil do GitHub:", error)
+        );
     }
   }, [isProfileOpen, profile, username]);
 
@@ -96,7 +101,8 @@ function AppContent() {
       product.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
       product.description.toLowerCase().includes(searchQuery.toLowerCase());
     const matchesCategory =
-      selectedCategory === "all" || product.category.toLowerCase() === selectedCategory;
+      selectedCategory === "all" ||
+      product.category.toLowerCase() === selectedCategory;
     return matchesSearch && matchesCategory;
   });
 
@@ -104,7 +110,10 @@ function AppContent() {
 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
-      if (isProfileOpen && !(event.target as Element).closest(".profile-dropdown")) {
+      if (
+        isProfileOpen &&
+        !(event.target as Element).closest(".profile-dropdown")
+      ) {
         setIsProfileOpen(false);
       }
     };
@@ -114,104 +123,122 @@ function AppContent() {
   }, [isProfileOpen]);
 
   const handleLogout = () => {
-    localStorage.removeItem('isAuthenticated');
-    navigate('/login');
+    localStorage.removeItem("isAuthenticated");
+    navigate("/login");
   };
 
   return (
     <div className="min-h-screen bg-gray-100 dark:bg-gray-900 transition-colors">
       {/* Header */}
       <header className="bg-white dark:bg-gray-800 shadow-sm transition-colors">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
-          <div className="flex justify-between items-center">
-            <h1 className="text-2xl font-bold text-gray-900 dark:text-white">StreetStyle</h1>
-            <form className="form relative">
-              <input
-                className="input rounded-full px-8 py-3 border-2 border-transparent focus:outline-none focus:border-blue-500 placeholder-gray-400 transition-all duration-300 shadow-md"
-                placeholder="Search..."
-              />
-            </form>
-            <div className="flex items-center gap-4 relative">
-              <button
-                onClick={toggleTheme}
-                className="p-2 rounded-full hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors"
-                aria-label="Toggle theme"
-              >
-                {theme === "light" ? (
-                  <Moon size={24} className="text-gray-800 dark:text-white" />
-                ) : (
-                  <Sun size={24} className="text-gray-800 dark:text-white" />
-                )}
-              </button>
-              <div className="relative">
-                <button
-                  onClick={() => setIsCheckingOut(true)}
-                  className="p-2 rounded-full hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors"
-                >
-                  <CartIcon size={24} className="text-gray-800 dark:text-white" />
-                  {cartItemsCount > 0 && (
-                    <span className="absolute -top-1 -right-2 bg-blue-600 text-white text-xs font-bold rounded-full w-5 h-5 flex items-center justify-center">
-                      {cartItemsCount}
-                    </span>
-                  )}
-                </button>
-              </div>
-              {/* Ícone do perfil e dropdown */}
-              <div className="relative profile-menu">
-                <button
-                  onClick={toggleProfileMenu}
-                  className="p-2 rounded-full hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors"
-                >
-                  <UserCircle size={24} className="text-gray-800 dark:text-white" />
-                </button>
-                {isProfileMenuOpen && (
-                  <div className="absolute right-0 mt-2 w-48 bg-white dark:bg-gray-800 rounded-lg shadow-lg py-2 z-50">
-                    <button
-                      className="w-full text-left px-4 py-2 text-gray-800 dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors"
-                      onClick={() => navigate("/Profile")}
-                    >
-                      Visit Profile
-                    </button>
-                    <button
-                      className="w-full text-left px-4 py-2 text-gray-800 dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors"
-                      onClick={() => navigate("/ProductCreate")}
-                    >
-                      Create Product
-                    </button>
-                    <button
-                      className="w-full text-left px-4 py-2 text-gray-800 dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors"
-                      onClick={handleLogout}
-                    >
-                      Log Out
-                    </button>
-                  </div>
-                )}
-              </div>
-              {/* Ícone do GitHub */}
-              <div className="relative">
-                <button
-                  onClick={() => window.open("https://github.com/Bielhsn/StreetStyle", "_blank")}
-                  className="group p-2 rounded-md drop-shadow-xl bg-gradient-to-r from-gray-800 to-black text-white font-semibold"
-                >
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    fill="none"
-                    viewBox="0 0 15 15"
-                    className="w-5 text-white"
-                  >
-                    <path
-                      clipRule="evenodd"
-                      fillRule="evenodd"
-                      fill="currentColor"
-                      d="M7.49933 0.25C3.49635 0.25 0.25 3.49593 0.25 7.50024C0.25 10.703 2.32715 13.4206 5.2081 14.3797C5.57084 14.446 5.70302 14.2222 5.70302 14.0299C5.70302 13.8576 5.69679 13.4019 5.69323 12.797C3.67661 13.235 3.25112 11.825 3.25112 11.825C2.92132 10.9874 2.44599 10.7644 2.44599 10.7644C1.78773 10.3149 2.49584 10.3238 2.49584 10.3238C3.22353 10.375 3.60629 11.0711 3.60629 11.0711C4.25298 12.1788 5.30335 11.8588 5.71638 11.6732C5.78225 11.205 5.96962 10.8854 6.17658 10.7043C4.56675 10.5209 2.87415 9.89918 2.87415 7.12104C2.87415 6.32925 3.15677 5.68257 3.62053 5.17563C3.54576 4.99226 3.29697 4.25521 3.69174 3.25691C3.69174 3.25691 4.30015 3.06196 5.68522 3.99973C6.26337 3.83906 6.8838 3.75895 7.50022 3.75583C8.1162 3.75895 8.73619 3.83906 9.31523 3.99973C10.6994 3.06196 11.3069 3.25691 11.3069 3.25691C11.7026 4.25521 11.4538 4.99226 11.3795 5.17563C11.8441 5.68257 12.1245 6.32925 12.1245 7.12104C12.1245 9.9063 10.4292 10.5192 8.81452 10.6985C9.07444 10.9224 9.30633 11.3648 9.30633 12.0413C9.30633 13.0102 9.29742 13.7922 9.29742 14.0299C9.29742 14.2239 9.42828 14.4496 9.79591 14.3788C12.6746 13.4179 14.75 10.7025 14.75 7.50024C14.75 3.49593 11.5036 0.25 7.49933 0.25Z"
-                    ></path>
-                  </svg>
-                </button>
-              </div>
-            </div>
-          </div>
-        </div>
-      </header>
+  <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex items-center justify-between">
+    {/* Logo */}
+    <div className="flex items-center">
+      <img
+        src="/public/img/icon.png"
+        alt="Logo"
+        className="h-16 w-auto mr-1 " // Adiciona 'ml-2' para margem à esquerda
+        />
+    </div>
+
+    {/* Barra de pesquisa centralizada */}
+    <div className="flex-1 mx-4 relative mr-8">
+      <input
+        type="search"
+        placeholder="Search Item"
+        aria-label="Search Item"
+        className="block w-full rounded-2xl border border-neutral-300 bg-transparent py-4 pl-6 pr-12 text-base/6 text-neutral-950 ring-4 ring-transparent transition placeholder:text-neutral-500 focus:border-neutral-950 focus:outline-none focus:ring-neutral-950/5"
+      />
+      <div className="absolute inset-y-0 right-3 flex items-center">
+        <button
+          type="submit"
+          aria-label="Submit"
+          className="flex h-8 w-8 items-center justify-center rounded-xl bg-neutral-950 text-white transition hover:bg-neutral-800"
+        >
+          <svg viewBox="0 0 16 6" aria-hidden="true" className="w-4">
+            <path
+              fill="currentColor"
+              fillRule="evenodd"
+              clipRule="evenodd"
+              d="M16 3 10 .5v2H0v1h10v2L16 3Z"
+            ></path>
+          </svg>
+        </button>
+      </div>
+    </div>
+
+    {/* Ícones alinhados à direita */}
+    <div className="flex items-center gap-4 ">
+      {/* Ícone do carrinho */}
+      <div className="group relative">
+        <button
+          onClick={() => setIsCheckingOut(true)}
+          className="text-gray-800 dark:text-white"
+        >
+          <svg
+            strokeLinejoin="round"
+            strokeLinecap="round"
+            strokeWidth="2"
+            stroke="currentColor"
+            fill="none"
+            viewBox="0 0 24 24"
+            className="w-8 hover:scale-125 duration-200 hover:stroke-blue-500"
+          >
+            <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
+          </svg>
+          {cartItemsCount > 0 && (
+            <span className="absolute -top-1 -right-2 bg-blue-600 text-white text-xs font-bold rounded-full w-5 h-5 flex items-center justify-center">
+              {cartItemsCount}
+            </span>
+          )}
+        </button>
+      </div>
+
+      {/* Ícone do perfil */}
+      <div className="relative">
+        <button
+          onClick={toggleProfileMenu}
+          className="text-gray-800 dark:text-white"
+        >
+          <svg
+            strokeLinejoin="round"
+            strokeLinecap="round"
+            strokeWidth="2"
+            stroke="currentColor"
+            fill="none"
+            viewBox="0 0 24 24"
+            className="w-8 hover:scale-125 duration-200 hover:stroke-blue-500"
+          >
+            <path
+              fillRule="evenodd"
+              d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z"
+            ></path>
+          </svg>
+        </button>
+      </div>
+
+      {/* Ícone do GitHub */}
+      <div className="ml-1">
+        <button
+          onClick={() => window.open("https://github.com/Bielhsn/StreetStyle", "_blank")}
+          className="text-gray-800 dark:text-white"
+        >
+          <svg
+            strokeLinejoin="round"
+            strokeLinecap="round"
+            strokeWidth="2"
+            stroke="currentColor"
+            fill="none"
+            viewBox="0 0 24 24"
+            className="w-8 hover:scale-125 duration-200 hover:stroke-blue-500"
+          >
+            <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path>
+          </svg>
+        </button>
+      </div>
+    </div>
+  </div>
+</header>
 
       {/* Main Content */}
       <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
@@ -230,6 +257,57 @@ function AppContent() {
           </>
         )}
       </main>
+      <div className="fixed bottom-4 left-4 z-50">
+  <label className="inline-flex items-center relative">
+    {/* Input para alternância de tema */}
+    <input
+      className="peer hidden"
+      id="toggle"
+      type="checkbox"
+      checked={theme === "dark"}
+      onChange={toggleTheme} // Função que alterna entre temas
+    />
+    {/* Corpo do toggle */}
+    <div
+      className="relative w-[110px] h-[50px] bg-white peer-checked:bg-zinc-500 rounded-full 
+      after:absolute after:content-[''] after:w-[40px] after:h-[40px] after:bg-gradient-to-r 
+      from-orange-500 to-yellow-400 peer-checked:after:from-zinc-900 peer-checked:after:to-zinc-900 
+      after:rounded-full after:top-[5px] after:left-[5px] active:after:w-[50px] peer-checked:after:left-[105px] 
+      peer-checked:after:translate-x-[-100%] shadow-sm duration-300 after:duration-300 after:shadow-md"
+    ></div>
+
+    {/* Ícone de Sol (Tema Claro) */}
+    <svg
+      height="0"
+      width="100"
+      viewBox="0 0 24 24"
+      data-name="Layer 1"
+      id="Layer_1"
+      xmlns="http://www.w3.org/2000/svg"
+      className="fill-white peer-checked:opacity-60 absolute w-6 h-6 left-[13px]"
+    >
+      <path
+        d="M12,17c-2.76,0-5-2.24-5-5s2.24-5,5-5,5,2.24,5,5-2.24,5-5,5ZM13,0h-2V5h2V0Zm0,19h-2v5h2v-5ZM5,11H0v2H5v-2Zm19,0h-5v2h5v-2Zm-2.81-6.78l-1.41-1.41-3.54,3.54,1.41,1.41,3.54-3.54ZM7.76,17.66l-1.41-1.41-3.54,3.54,1.41,1.41,3.54-3.54Zm0-11.31l-3.54-3.54-1.41,1.41,3.54,3.54,1.41-1.41Zm13.44,13.44l-3.54-3.54-1.41,1.41,3.54,3.54,1.41-1.41Z"
+      ></path>
+    </svg>
+
+    {/* Ícone de Lua (Tema Escuro) */}
+    <svg
+      height="512"
+      width="512"
+      viewBox="0 0 24 24"
+      data-name="Layer 1"
+      id="Layer_1"
+      xmlns="http://www.w3.org/2000/svg"
+      className="fill-black opacity-60 peer-checked:opacity-70 peer-checked:fill-white absolute w-6 h-6 right-[13px]"
+    >
+      <path
+        d="M12.009,24A12.067,12.067,0,0,1,.075,10.725,12.121,12.121,0,0,1,10.1.152a13,13,0,0,1,5.03.206,2.5,2.5,0,0,1,1.8,1.8,2.47,2.47,0,0,1-.7,2.425c-4.559,4.168-4.165,10.645.807,14.412h0a2.5,2.5,0,0,1-.7,4.319A13.875,13.875,0,0,1,12.009,24Zm.074-22a10.776,10.776,0,0,0-1.675.127,10.1,10.1,0,0,0-8.344,8.8A9.928,9.928,0,0,0,4.581,18.7a10.473,10.473,0,0,0,11.093,2.734.5.5,0,0,0,.138-.856h0C9.883,16.1,9.417,8.087,14.865,3.124a.459.459,0,0,0,.127-.465.491.491,0,0,0-.356-.362A10.68,10.68,0,0,0,12.083,2ZM20.5,12a1,1,0,0,1-.97-.757l-.358-1.43L17.74,9.428a1,1,0,0,1,.035-1.94l1.4-.325.351-1.406a1,1,0,0,1,1.94,0l.355,1.418,1.418.355a1,1,0,0,1,0,1.94l-1.418.355-.355,1.418A1,1,0,0,1,20.5,12ZM16,14a1,1,0,0,0,2,0A1,1,0,0,0,16,14Zm6,4a1,1,0,0,0,2,0A1,1,0,0,0,22,18Z"
+      ></path>
+    </svg>
+  </label>
+</div>
+
     </div>
   );
 }
@@ -247,9 +325,15 @@ function App() {
             <Route path="/LocationSettings" element={<LocationSettings />} />
             <Route path="/ShippingSettings" element={<ShippingSettings />} />
             <Route path="/PaymentSettings" element={<PaymentSettings />} />
-            <Route path="/NotificationSettings" element={<NotificationSettings />} />
+            <Route
+              path="/NotificationSettings"
+              element={<NotificationSettings />}
+            />
             <Route path="/SecuritySettings" element={<SecuritySettings />} />
-            <Route path="/ConnectionSettings" element={<ConnectionSettings />} />
+            <Route
+              path="/ConnectionSettings"
+              element={<ConnectionSettings />}
+            />
             <Route path="/ProductEdit" element={<ProductEdit />} />
             <Route path="/Analytics" element={<Analytics />} />
             <Route path="/Login" element={<Login />} />
